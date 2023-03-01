@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "capa-eks-control-plane.fullname" . }}-controller-manager-metrics-service
+  labels:
+    cluster.x-k8s.io/provider: control-plane-eks
+    control-plane: controller-manager
+  {{- include "capa-eks-control-plane.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.metricsService.type }}
+  selector:
+    cluster.x-k8s.io/provider: control-plane-eks
+    control-plane: controller-manager
+  {{- include "capa-eks-control-plane.selectorLabels" . | nindent 4 }}
+  ports:
+	{{- .Values.metricsService.ports | toYaml | nindent 2 -}}

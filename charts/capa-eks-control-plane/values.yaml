@@ -1,0 +1,29 @@
+controllerManager:
+  kubeRbacProxy:
+    image:
+      repository: gcr.io/kubebuilder/kube-rbac-proxy
+      tag: v0.5.0
+  manager:
+    env:
+      awsSharedCredentialsFile: /home/.aws/credentials
+    image:
+      repository: k8s.gcr.io/cluster-api-aws/eks-controlplane-controller
+      tag: v0.6.9
+  replicas: 1
+kubernetesClusterDomain: cluster.local
+metricsService:
+  ports:
+  - name: https
+    port: 8443
+    targetPort: https
+  type: ClusterIP
+webhookService:
+  ports:
+  - port: 443
+    targetPort: webhook-server
+  type: ClusterIP
+providerArgs:
+  eksIAM: false
+  eksAddRoles: false
+  machinePool: false
+  eksCPLogLevel: 4

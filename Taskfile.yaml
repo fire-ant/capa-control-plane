@@ -1,0 +1,24 @@
+# https://taskfile.dev
+
+version: '3'
+
+tasks:
+  purge:
+    cmds:
+      - echo "Purging..."
+      - rm -rf dist
+
+  default:
+    deps:
+      - purge
+    cmds:
+      - mkdir dist
+      - echo $CR_PAT | helm registry login ghcr.io --username $OWNER --password-stdin
+      - helm package charts/capa-eks-control-plane --destination dist
+      - helm push dist/capa-eks-control-plane-*.tgz oci://ghcr.io/fire-ant > .digest
+      - cat .digest | awk -F "[, ]+" '/Digest/{print $NF}'
+      - cosign sign ghcr.io/fire-ant/capa-eks-control-plane@$(cat .digest | awk -F "[, ]+" '/Digest/{print $NF}')
+    env:
+      HELM_EXPERIMENTAL_OCI: 1
+      COSIGN_EXPERIMENTAL: "true"
+

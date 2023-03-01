@@ -1,0 +1,9 @@
+apiVersion: cert-manager.io/v1alpha2
+kind: Issuer
+metadata:
+  name: {{ include "capa-eks-control-plane.fullname" . }}-selfsigned-issuer
+  labels:
+    cluster.x-k8s.io/provider: control-plane-eks
+  {{- include "capa-eks-control-plane.labels" . | nindent 4 }}
+spec:
+  selfSigned: {}

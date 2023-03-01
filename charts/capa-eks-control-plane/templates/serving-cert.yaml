@@ -1,0 +1,15 @@
+apiVersion: cert-manager.io/v1alpha2
+kind: Certificate
+metadata:
+  name: {{ include "capa-eks-control-plane.fullname" . }}-serving-cert
+  labels:
+    cluster.x-k8s.io/provider: control-plane-eks
+  {{- include "capa-eks-control-plane.labels" . | nindent 4 }}
+spec:
+  dnsNames:
+  - capa-eks-control-plane-webhook-service.capi-webhook-system.svc
+  - capa-eks-control-plane-webhook-service.capi-webhook-system.svc.cluster.local
+  issuerRef:
+    kind: Issuer
+    name: capa-eks-control-plane-selfsigned-issuer
+  secretName: capa-eks-control-plane-webhook-service-cert
