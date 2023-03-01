@@ -28,6 +28,17 @@ entries:
     urls:
     - https://github.com/scottrigby/charts-repo-test/releases/download/alpine-0.1.1/alpine-0.1.1.tgz
     version: 0.1.1
+  capa-eks-control-plane:
+  - apiVersion: v2
+    appVersion: 0.6.9
+    created: "2023-03-01T11:54:41.20100392Z"
+    description: A Helm Chart for the cluster-api-provider-aws eks-controlplane provider
+    digest: 374c82bd4bdda38dd4c397bc49e72db1e7f0f6ce06e86f6ff2120561d4957e94
+    name: capa-eks-control-plane
+    type: application
+    urls:
+    - https://github.com/fire-ant/capa-control-plane/releases/download/capa-eks-control-plane-0.6.9/capa-eks-control-plane-0.6.9.tgz
+    version: 0.6.9
   capmvm:
   - apiVersion: v2
     appVersion: 0.8.0
@@ -575,4 +586,4 @@ entries:
     urls:
     - https://github.com/helm/charts-repo-actions-demo/releases/download/example-v2-0.2.2/example-v2-0.2.2.tgz
     version: 0.2.2
-generated: "2023-02-28T10:58:11.320612234Z"
+generated: "2023-03-01T11:54:41.201088219Z"
